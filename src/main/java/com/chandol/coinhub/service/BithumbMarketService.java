@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,12 @@ public class BithumbMarketService implements MarketService {
 
     @Override
     public List<String> getCoins() {
-        return List.of("A", "B", "C");
+        List<String> result = new ArrayList<>();
+        bithumbFeignClient.getAssetStatus().getData().forEach((k, v) -> {
+            if (v.getDeposit_status() == 1 & v.getWithdrawal_status() == 1) {
+                result.add(k.toUpperCase());
+            }
+        });
+        return result;
     }
 }

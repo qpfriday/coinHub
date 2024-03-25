@@ -28,7 +28,7 @@ public class MarketController {
     }
 
     @GetMapping("/common-coins")
-    public List<String> getCommonCoins(@RequestParam(name = "market") String market1, @RequestParam(name = "market") String market2) {
+    public List<String> getCommonCoins(@RequestParam(name = "market1") String market1, @RequestParam(name = "market2") String market2) {
         return commonMarketService.getCommonCoin(market1, market2);
     }
 }
